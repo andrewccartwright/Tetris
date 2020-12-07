@@ -10,6 +10,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import java.awt.Canvas;
+import java.awt.Rectangle;
 
 public class Test extends JFrame 
 {
@@ -17,7 +20,7 @@ public class Test extends JFrame
 	private JLabel options;
 	private JLabel credits;
 	private JLabel game;
-	public ImageIcon mainmenu = new ImageIcon("Images/MainMenu-01.png");
+	public ImageIcon mainmenu;
 
 	public static void main(String[] args) 
 	{
@@ -42,19 +45,19 @@ public class Test extends JFrame
 		setResizable(false);
 		
 		game = new JLabel("");
-		//game.setIcon(new ImageIcon("C:\\Users\\haile\\Desktop\\Tetris Project workspace\\Images\\MainMenu-01.png"));
+		game.setIcon(new ImageIcon("Images\\Background.png"));
 		game.setLayout(null);
 		
 		menu = new JLabel("");
-		menu.setIcon(new ImageIcon("C:\\Users\\haile\\Desktop\\Tetris Project workspace\\Images\\MainMenu-01.png"));
+		menu.setIcon(new ImageIcon("Images\\MainMenu-01.png"));
 		menu.setLayout(null);
 		
 		options = new JLabel("");
-		options.setIcon(new ImageIcon("C:\\Users\\haile\\Desktop\\Tetris Project workspace\\Images\\MenuBackground.png"));
+		options.setIcon(new ImageIcon("Images\\OptionsMenu.png"));
 		options.setLayout(null);
 		
 		credits = new JLabel("");
-		credits.setIcon(new ImageIcon("C:\\Users\\haile\\Desktop\\Tetris Project workspace\\Images\\MenuBackground.png"));
+		credits.setIcon(new ImageIcon("Images\\CreditsMenu.png"));
 		credits.setLayout(null);
 		
 		setContentPane(menu);
@@ -62,7 +65,7 @@ public class Test extends JFrame
 		JButton StartButton = new JButton("");
 		StartButton.setBorder(null);
 		StartButton.setBounds(10, 204, 206, 76);
-		StartButton.setIcon(new ImageIcon ("C:\\Users\\haile\\Desktop\\Tetris Project workspace\\Images\\Button-01.png"));
+		StartButton.setIcon(new ImageIcon ("Images\\StartButton.png"));
 		StartButton.setFocusPainted(false);
 		StartButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		StartButton.setContentAreaFilled(false);
@@ -72,7 +75,7 @@ public class Test extends JFrame
 			public void actionPerformed(ActionEvent e) 
 			{
 				setContentPane(game);
-				resize(550, 600);
+				resize(540, 542);
 				repaint();
 				revalidate();
 			}
@@ -82,7 +85,7 @@ public class Test extends JFrame
 		JButton OptionsButton = new JButton("");
 		OptionsButton.setBorder(null);
 		OptionsButton.setBounds(10, 300, 206, 76);
-		OptionsButton.setIcon(new ImageIcon ("C:\\Users\\haile\\Desktop\\Tetris Project workspace\\Images\\Button-01.png"));
+		OptionsButton.setIcon(new ImageIcon ("Images\\OptButton.png"));
 		OptionsButton.setFocusPainted(false);
 		OptionsButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		OptionsButton.setContentAreaFilled(false);
@@ -101,7 +104,7 @@ public class Test extends JFrame
 		JButton CreditsButton = new JButton("");
 		CreditsButton.setBorder(null);
 		CreditsButton.setBounds(229, 204, 206, 76);
-		CreditsButton.setIcon(new ImageIcon ("C:\\Users\\haile\\Desktop\\Tetris Project workspace\\Images\\Button-01.png"));
+		CreditsButton.setIcon(new ImageIcon ("Images\\CredButton.png"));
 		CreditsButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		CreditsButton.setFocusPainted(false);
 		CreditsButton.setContentAreaFilled(false);
@@ -120,7 +123,7 @@ public class Test extends JFrame
 		JButton Quit = new JButton("");
 		Quit.setBorder(null);
 		Quit.setBounds(229, 300, 206, 76);
-		Quit.setIcon(new ImageIcon("C:\\Users\\haile\\Desktop\\Tetris Project workspace\\Images\\Button-01.png"));
+		Quit.setIcon(new ImageIcon("Images\\QuitButton.png"));
 		Quit.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		Quit.setFocusPainted(false);
 		Quit.setContentAreaFilled(false);
@@ -129,15 +132,26 @@ public class Test extends JFrame
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
-			//TODO: close the game??
+			System.exit(0);
 		}
 			});
 		menu.add(Quit);
 		
+		JLabel GamePanel = new JLabel();
+		GamePanel.setBounds(0,0, 255, 505);
+		GamePanel.setIcon(new ImageIcon("Images\\GameBackground.png"));
+		game.add(GamePanel);
+		
+		JLabel ScorePanel = new JLabel("Current Score");
+		ScorePanel.setForeground(Color.WHITE);
+		ScorePanel.setIcon(null);
+		ScorePanel.setBounds(new Rectangle(255, 0, 280, 150));
+		game.add(ScorePanel);
+		
 		JButton GBack = new JButton("");
 		GBack.setBorder(null);
-		GBack.setBounds(229, 300, 206, 76);
-		GBack.setIcon(new ImageIcon("C:\\Users\\haile\\Desktop\\Tetris Project workspace\\Images\\Button-01.png"));
+		GBack.setBounds(300, 400, 206, 76);
+		GBack.setIcon(new ImageIcon("Images\\BackButton.png"));
 		GBack.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		GBack.setFocusPainted(false);
 		GBack.setContentAreaFilled(false);
@@ -157,7 +171,7 @@ public class Test extends JFrame
 		JButton OBack = new JButton("");
 		OBack.setBorder(null);
 		OBack.setBounds(229, 300, 206, 76);
-		OBack.setIcon(new ImageIcon("C:\\Users\\haile\\Desktop\\Tetris Project workspace\\Images\\Button-01.png"));
+		OBack.setIcon(new ImageIcon("Images\\BackButton.png"));
 		OBack.setContentAreaFilled(false);
 		OBack.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		OBack.setFocusPainted(false);
@@ -177,7 +191,7 @@ public class Test extends JFrame
 		JButton CBack = new JButton("");
 		CBack.setBorder(null);
 		CBack.setBounds(229, 300, 206, 76);
-		CBack.setIcon(new ImageIcon("C:\\Users\\haile\\Desktop\\Tetris Project workspace\\Images\\Button-01.png"));
+		CBack.setIcon(new ImageIcon("Images\\BackButton.png"));
 		CBack.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		CBack.setFocusPainted(false);
 		CBack.setContentAreaFilled(false);

@@ -3,24 +3,24 @@ package tetris;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.EventQueue;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import java.awt.Canvas;
-import java.awt.Rectangle;
 
-public class Test extends JFrame 
+public class Test extends JFrame
 {
 	private JLabel menu;
 	private JLabel options;
 	private JLabel credits;
-	private JLabel game;
+	private GameBoard game;
+	static JButton GBack;
 	public ImageIcon mainmenu;
+	boolean gameOn = false;
 
 	public static void main(String[] args) 
 	{
@@ -37,20 +37,52 @@ public class Test extends JFrame
 		});
 	}
 
-	public Test() 
+	public Test()
 	{	
 		setBackground(Color.BLACK);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 465, 420);
 		setResizable(false);
+		setFocusable(true);
+		addKeyListener(new KeyListener()
+				{
+			@Override
+			public void keyTyped(KeyEvent e)
+			{
+				if(gameOn)
+					System.out.println("key pressed");
+			}
+			@Override
+			public void keyPressed(KeyEvent e){}
+			@Override
+			public void keyReleased(KeyEvent e){}
+				});
+		GBack = new JButton("");
+		GBack.setBorder(null);
+		GBack.setBounds(300, 400, 206, 76);
+		GBack.setIcon(new ImageIcon("Images\\BackButton.png"));
+		GBack.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		GBack.setFocusPainted(false);
+		GBack.setContentAreaFilled(false);
+		GBack.addActionListener(new ActionListener()
+			{
+		@Override
+		public void actionPerformed(ActionEvent e) 
+		{
+			setContentPane(menu);
+			setSize(465, 420);
+			repaint();
+			revalidate();
+			gameOn = false;
+		}
+			});
 		
-		game = new JLabel("");
-		game.setIcon(new ImageIcon("Images\\Background.png"));
-		game.setLayout(null);
+		game = new GameBoard();
 		
 		menu = new JLabel("");
 		menu.setIcon(new ImageIcon("Images\\MainMenu-01.png"));
 		menu.setLayout(null);
+		menu.setFocusable(false);
 		
 		options = new JLabel("");
 		options.setIcon(new ImageIcon("Images\\OptionsMenu.png"));
@@ -74,10 +106,12 @@ public class Test extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
+				game = new GameBoard();
+				setSize(540, 542);
 				setContentPane(game);
-				resize(540, 542);
 				repaint();
 				revalidate();
+				gameOn = true;
 			}
 				});
 		menu.add(StartButton);
@@ -137,37 +171,6 @@ public class Test extends JFrame
 			});
 		menu.add(Quit);
 		
-		JLabel GamePanel = new JLabel();
-		GamePanel.setBounds(0,0, 255, 505);
-		GamePanel.setIcon(new ImageIcon("Images\\GameBackground.png"));
-		game.add(GamePanel);
-		
-		JLabel ScorePanel = new JLabel("Current Score");
-		ScorePanel.setForeground(Color.WHITE);
-		ScorePanel.setIcon(null);
-		ScorePanel.setBounds(new Rectangle(255, 0, 280, 150));
-		game.add(ScorePanel);
-		
-		JButton GBack = new JButton("");
-		GBack.setBorder(null);
-		GBack.setBounds(300, 400, 206, 76);
-		GBack.setIcon(new ImageIcon("Images\\BackButton.png"));
-		GBack.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		GBack.setFocusPainted(false);
-		GBack.setContentAreaFilled(false);
-		GBack.addActionListener(new ActionListener()
-			{
-		@Override
-		public void actionPerformed(ActionEvent e) 
-		{
-			setContentPane(menu);
-			resize(465, 420);
-			repaint();
-			revalidate();
-		}
-			});
-		game.add(GBack);
-		
 		JButton OBack = new JButton("");
 		OBack.setBorder(null);
 		OBack.setBounds(229, 300, 206, 76);
@@ -181,7 +184,7 @@ public class Test extends JFrame
 		public void actionPerformed(ActionEvent e) 
 		{
 			setContentPane(menu);
-			resize(465, 420);
+			setSize(465, 420);
 			repaint();
 			revalidate();
 		}
@@ -201,7 +204,7 @@ public class Test extends JFrame
 		public void actionPerformed(ActionEvent e) 
 		{
 			setContentPane(menu);
-			resize(465, 420);
+			setSize(465, 420);
 			repaint();
 			revalidate();
 		}

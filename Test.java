@@ -12,7 +12,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class Test extends JFrame
+import me.antoniomarroquin.tetris.GameDriver;
+import me.antoniomarroquin.tetris.mechanics.GameOptions;
+
+public class TetrisUserInterface extends JFrame
 {
 	private JLabel menu;
 	private JLabel options;
@@ -22,22 +25,22 @@ public class Test extends JFrame
 	public ImageIcon mainmenu;
 	boolean gameOn = false;
 
-	public static void main(String[] args) 
-	{
-		EventQueue.invokeLater(new Runnable() 
-		{
-			public void run() {
-				try {
-					Test frame = new Test();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) 
+//	{
+//		EventQueue.invokeLater(new Runnable() 
+//		{
+//			public void run() {
+//				try {
+//					TetrisUserInterface frame = new TetrisUserInterface();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
-	public Test()
+	public TetrisUserInterface()
 	{	
 		setBackground(Color.BLACK);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -47,13 +50,20 @@ public class Test extends JFrame
 		addKeyListener(new KeyListener()
 				{
 			@Override
-			public void keyTyped(KeyEvent e)
+			public void keyPressed(KeyEvent e)
 			{
+				int key = e.getKeyCode();
+				
 				if(gameOn)
-					System.out.println("key pressed");
+				{
+					if (key == KeyEvent.VK_ESCAPE)
+						GameDriver.options.pauseAndUnpauseGame();
+//					System.out.println("key pressed");
+					
+				}
 			}
 			@Override
-			public void keyPressed(KeyEvent e){}
+			public void keyTyped(KeyEvent e){}
 			@Override
 			public void keyReleased(KeyEvent e){}
 				});
@@ -69,6 +79,7 @@ public class Test extends JFrame
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
+			GameOptions.mainGame = null;
 			setContentPane(menu);
 			setSize(465, 420);
 			repaint();
@@ -106,6 +117,7 @@ public class Test extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
+				GameDriver.options.singlePlayer(null);
 				game = new GameBoard();
 				setSize(540, 542);
 				setContentPane(game);

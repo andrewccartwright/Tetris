@@ -57,9 +57,10 @@ public class Test extends JFrame
 			@Override
 			public void keyReleased(KeyEvent e){}
 				});
+		
 		GBack = new JButton("");
 		GBack.setBorder(null);
-		GBack.setBounds(300, 400, 206, 76);
+		GBack.setBounds(290, 400, 206, 76);
 		GBack.setIcon(new ImageIcon("Images\\BackButton.png"));
 		GBack.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		GBack.setFocusPainted(false);
@@ -107,7 +108,7 @@ public class Test extends JFrame
 			public void actionPerformed(ActionEvent e) 
 			{
 				game = new GameBoard();
-				setSize(540, 542);
+				setSize(540, 540);
 				setContentPane(game);
 				repaint();
 				revalidate();

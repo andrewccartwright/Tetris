@@ -132,20 +132,6 @@ public class Shape extends Component
                 PlayingField.bricks[bricks[i].getYPos()][bricks[i].getXPos()] = bricks[i];
             }
         }
-
-        for(int i = 0; i < PlayingField.FIELDHEIGHT; i++)
-        {
-            for(int j = 0; j < PlayingField.FIELDWIDTH; j++)
-            {
-                if(PlayingField.bricks[i][j] != null)
-                {
-                    System.out.print("aaaa ");
-                }
-                else
-                    System.out.print(PlayingField.bricks[i][j] + " ");
-            }
-            System.out.println();
-        }
     }
 
     //checks that the piece can rotate without going out of bounds or hitting another piece

@@ -1,5 +1,5 @@
 //SShape class
-// package tetris;
+package tetris.shapes;
 
 import java.awt.Color;
 

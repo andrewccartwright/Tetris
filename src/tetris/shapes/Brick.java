@@ -1,9 +1,11 @@
 //Brick class of Tetris project
-// package tetris;
+package tetris.shapes;
 
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
+
+import tetris.mechanics.PlayingField;
 
 public class Brick extends Component
 {

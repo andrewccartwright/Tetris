@@ -1,11 +1,13 @@
 //Shape class
-// package tetris;
+package tetris.shapes;
 
 import java.awt.Component;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.lang.Math;
 import java.util.ArrayList;
+
+import tetris.mechanics.PlayingField;
 
 public class Shape extends Component
 {

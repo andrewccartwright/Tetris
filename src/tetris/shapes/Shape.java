@@ -1,13 +1,11 @@
 //Shape class
-package tetris.shapes;
+// package tetris;
 
 import java.awt.Component;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.lang.Math;
 import java.util.ArrayList;
-
-import tetris.mechanics.PlayingField;
 
 public class Shape extends Component
 {
@@ -40,6 +38,11 @@ public class Shape extends Component
             {
                 if(PlayingField.bricks[bricks[i].getYPos()-1][bricks[i].getXPos()] == null)
                     canMove = true;
+                else
+                {
+                    canMove = false;
+                    break;
+                }
             }
             else
             {
@@ -117,23 +120,31 @@ public class Shape extends Component
         {
             placePiece();
         }
-
-        for(int j = 0; j < 4; j++)
-        {
-            System.out.println(bricks[j].getXPos() + ", " + bricks[j].getYPos());
-        }
     }
 
     //places the current piece when there is another piece below it or it reaches the bottom of the playing field
     public void placePiece()
     {
-
         for(int i = 0; i < 4; i++)
         {
             if(!canMove())
             {
                 PlayingField.bricks[bricks[i].getYPos()][bricks[i].getXPos()] = bricks[i];
             }
+        }
+
+        for(int i = 0; i < PlayingField.FIELDHEIGHT; i++)
+        {
+            for(int j = 0; j < PlayingField.FIELDWIDTH; j++)
+            {
+                if(PlayingField.bricks[i][j] != null)
+                {
+                    System.out.print("aaaa ");
+                }
+                else
+                    System.out.print(PlayingField.bricks[i][j] + " ");
+            }
+            System.out.println();
         }
     }
 

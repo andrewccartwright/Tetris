@@ -2,6 +2,8 @@ package tetris.mechanics;
 
 import javax.swing.JPanel;
 
+import tetris.Test;
+
 public class GameOptions
 {
 	
@@ -11,9 +13,9 @@ public class GameOptions
 	// update 20 times per second
 	public static final int GAMETICKS = 1000 / 50;
 	
-	public void singlePlayer(JPanel game)
+	public void singlePlayer(Test game)
 	{
-		mainGame = new PlayingField();
+		mainGame = new PlayingField(game);
 	}
 	
 	// optional if we have time

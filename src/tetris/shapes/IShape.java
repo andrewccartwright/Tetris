@@ -8,10 +8,11 @@ public class IShape extends Shape
     public IShape(int startX, int startY)
     {
         super(startX, startY);
-        bricks[1] = new Brick(startX+1, startY);
-        bricks[2] = new Brick(startX+2, startY);
-        bricks[3] = new Brick(startX+3, startY);
         c1 = colors[1];
+        bricks[0].setColor(c1);
+        bricks[1] = new Brick(startX+1, startY, getColor());
+        bricks[2] = new Brick(startX+2, startY, getColor());
+        bricks[3] = new Brick(startX+3, startY, getColor());
     }
 
     //  |_|

@@ -1,5 +1,6 @@
 package tetris.mechanics;
 
+import tetris.Test;
 import tetris.shapes.Brick;
 import tetris.shapes.IShape;
 import tetris.shapes.LShape;
@@ -21,14 +22,16 @@ public class PlayingField
 	
 	public static Brick[][] bricks = new Brick[FIELDHEIGHT][FIELDWIDTH];
 	public Shape currentShape;
+	public Test gui;
 	
-	public PlayingField()
+	public PlayingField(Test gui)
 	{
-		generateShape();
+		this.gui = gui;
+		generateShape(gui);
 	}
 
 	// create a shape of a random type and set it to be the current shape
-	public void generateShape()
+	public void generateShape(Test gui)
 	{
 		int startX = FIELDWIDTH / 2;
 		int startY = FIELDHEIGHT - 1;
@@ -44,16 +47,13 @@ public class PlayingField
 			System.err.println("Unique Shape Count does not match total number of Unique Shape Classes.");
 		break;
 		}
+		
+		gui.getGameBoard().addBricks(currentShape.getBricks());
 	}
 	
 	public void updateField()
 	{
-		for (Brick[] brick : bricks)
-			for (Brick b : brick)
-				if (b != null)
-					System.out.print("");
-					//System.out.println(this.currentShape.toString() + b.getXPos() + ", " + b.getYPos());
-					// update image with new location
+		gui.getGameBoard().moveBricks();
 	}
 	
 	// called whenever a line of the playing field has been filled

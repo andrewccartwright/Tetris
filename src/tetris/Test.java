@@ -12,6 +12,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import tetris.mechanics.GameOptions;
+import tetris.mechanics.PlayingField;
+
 public class Test extends JFrame
 {
 	private JLabel menu;
@@ -50,10 +53,25 @@ public class Test extends JFrame
 			public void keyTyped(KeyEvent e)
 			{
 				if(gameOn)
-					System.out.println("key pressed");
+					if (e.getKeyCode() == KeyEvent.VK_S)
+						System.out.println("TEST");
 			}
 			@Override
-			public void keyPressed(KeyEvent e){}
+			public void keyPressed(KeyEvent e) {
+				if(gameOn)
+				{
+					if (e.getKeyCode() == KeyEvent.VK_S)
+						GameOptions.mainGame.moveDown();
+					if (e.getKeyCode() == KeyEvent.VK_A)
+						GameOptions.mainGame.currentShape.moveLeft();
+					if (e.getKeyCode() == KeyEvent.VK_D)
+						GameOptions.mainGame.currentShape.moveRight();
+					if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+						GameOptions.mainGame.currentShape.rotateRight();
+					if (e.getKeyCode() == KeyEvent.VK_LEFT)
+						GameOptions.mainGame.currentShape.rotateLeft();
+				}
+			}
 			@Override
 			public void keyReleased(KeyEvent e){}
 				});
@@ -113,6 +131,7 @@ public class Test extends JFrame
 				repaint();
 				revalidate();
 				gameOn = true;
+				start();
 			}
 				});
 		menu.add(StartButton);
@@ -212,4 +231,11 @@ public class Test extends JFrame
 			});
 		credits.add(CBack);
 	}
+	
+	public void start()
+	{
+		GameOptions.mainGame = new PlayingField(this);
+	}
+	
+	public GameBoard getGameBoard() {return game;}
 }

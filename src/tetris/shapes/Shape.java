@@ -1,5 +1,6 @@
 //Shape class
 // package tetris;
+package tetris.shapes;
 
 import java.awt.Component;
 import java.awt.Color;
@@ -7,11 +8,16 @@ import java.awt.Graphics;
 import java.lang.Math;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
+import tetris.GameBoard;
+import tetris.mechanics.PlayingField;
+
 public class Shape extends Component
 {
     protected Brick[] bricks = new Brick[4];
-    protected Color[] colors = {Color.cyan, Color.green, Color.yellow, Color.red, Color.orange, Color.magenta, Color.pink};
-    protected Color c1;
+    protected ImageIcon[] colors = {GameBoard.CYAN, GameBoard.GREEN, GameBoard.YELLOW, GameBoard.RED, GameBoard.ORANGE, GameBoard.PURPLE, GameBoard.PINK};
+    protected ImageIcon c1;
     protected boolean canMove = true;
 
     //default constructor
@@ -21,13 +27,13 @@ public class Shape extends Component
     }
 
     //setters
-    public void setColor(Color c1){this.c1 = c1;}
+    public void setColor(ImageIcon c1){this.c1 = c1;}
     public void setBricks(Brick[] bricks){this.bricks = bricks;}
 
     //getters
     public Brick[] getBricks(){return bricks;}
-    public Color[] getColors(){return colors;}
-    public Color getColor(){return c1;}
+    public ImageIcon[] getColors(){return colors;}
+    public ImageIcon getColor(){return c1;}
 
     //tests if the piece can move down without hitting another piece or going out of bounds
     public boolean canMove()
@@ -92,7 +98,7 @@ public class Shape extends Component
         boolean canMoveRight = true;
         for(int i = 0; i < 4; i++)
         {
-            if(bricks[i].getXPos()+1 < PlayingField.FIELDWIDTH-1)
+            if(bricks[i].getXPos()+1 < PlayingField.FIELDWIDTH)
             {
                 canMoveRight = true;
             }
@@ -285,16 +291,16 @@ public class Shape extends Component
     }
 
 
-    //draws the shape
-    public void drawImage(Graphics g)
-    {
-        super.paint(g);
-
-        g.setColor(c1);
-
-        bricks[0].drawImage(g);
-        bricks[1].drawImage(g);
-        bricks[2].drawImage(g);
-        bricks[3].drawImage(g);
-    }
+//    //draws the shape
+//    public void drawImage(Graphics g)
+//    {
+//        super.paint(g);
+//
+//        g.setColor(c1);
+//
+//        bricks[0].drawImage(g);
+//        bricks[1].drawImage(g);
+//        bricks[2].drawImage(g);
+//        bricks[3].drawImage(g);
+//    }
 }

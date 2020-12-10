@@ -1,5 +1,10 @@
 package tetris.mechanics;
 
+import java.io.IOException;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 import tetris.Test;
 import tetris.shapes.Brick;
 
@@ -8,12 +13,12 @@ public class GameDriver {
 	public static GameOptions options;
 	public Test gui;
 	
-	public static void main(String[] args) throws InterruptedException
+	public static void main(String[] args) throws InterruptedException, UnsupportedAudioFileException, IOException, LineUnavailableException
 	{
 		new GameDriver();
 	}
 	
-	public GameDriver() throws InterruptedException
+	public GameDriver() throws InterruptedException, UnsupportedAudioFileException, IOException, LineUnavailableException
 	{
 		options = new GameOptions();
 		gui = new Test();
@@ -42,7 +47,12 @@ public class GameDriver {
 					if (!GameOptions.mainGame.currentShape.canMove())
 						GameOptions.mainGame.generateShape(gui);
 					if (secondCount < 1000)
+					{
 						secondCount += GameOptions.GAMETICKS;
+						for (Brick b : PlayingField.bricks[10])
+							if (b != null)
+								System.out.print("(" + b.getXPos() + ", " + b.getYPos() + ")");
+					}
 					else
 					{
 						secondCount = 0;

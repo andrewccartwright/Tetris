@@ -251,5 +251,19 @@ public class Test extends JFrame
 		GameOptions.mainGame = new PlayingField(this);
 	}
 	
+	public void end()
+	{
+		setContentPane(menu);
+		setSize(465, 420);
+		repaint();
+		revalidate();
+		gameOn = false;
+	}
+	
+	public void deleteBricks()
+	{
+		
+	}
+	
 	public GameBoard getGameBoard() {return game;}
 }

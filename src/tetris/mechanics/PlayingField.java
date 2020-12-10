@@ -51,8 +51,33 @@ public class PlayingField
 		gui.getGameBoard().addBricks(currentShape.getBricks());
 	}
 	
-	public void updateField()
+	private int checkForFullRows()
 	{
+		int full = -1;
+		for (int i = 0; i < FIELDHEIGHT; i++)
+		{
+			for (int j = 0; j < FIELDWIDTH; j++)
+			{
+				if (bricks[i][j] == null)
+				{
+					full = -1;
+					break;
+				}
+				else
+					full = i;
+			}
+			if (full != -1)
+				return full;
+		}
+		return -1;
+	}
+	
+	public void updateField() throws InterruptedException
+	{
+		if (checkForFullRows() != -1)
+		{
+			eraseLine(checkForFullRows());
+		}
 		gui.getGameBoard().moveBricks();
 	}
 	
@@ -60,8 +85,15 @@ public class PlayingField
 	public void eraseLine(int indexRow) throws InterruptedException
 	{
 		for (int i = 0; i < FIELDWIDTH; i++)
+		{
+			Brick temp = bricks[indexRow][i];
+			temp.setXPos(-100);
+			temp.setYPos(-100);
 			bricks[indexRow][i] = null;
+		}
+		System.out.println("INDEX ROW IS: " + indexRow);
 		Thread.sleep(GameOptions.GAMETICKS);
+		gui.getGameBoard().deleteBricks();
 		movePiecesDown(indexRow);
 	}
 	
@@ -73,11 +105,13 @@ public class PlayingField
 			for (int i = 0; i < FIELDWIDTH; i++)
 				if (bricks[indexRow][i] != null)
 				{
+					bricks[indexRow][i].moveDown();
 					bricks[indexRow - 1][i] = bricks[indexRow][i];
 					bricks[indexRow][i] = null;
 				}
 			indexRow++;
 		}
+		gui.getGameBoard().moveBricks();
 	}
 	
 	// check the bounds of the pieces that are already placed and place the current piece on top of them
@@ -96,11 +130,9 @@ public class PlayingField
 		{
 			for (int i = 0; i < FIELDWIDTH; i++)
 				for (Brick b : currentShape.getBricks())
-					if (bricks[FIELDHEIGHT - 1][FIELDWIDTH].equals(b))
-					{
-						GameOptions.endGame();
-						return true;
-					}
+					if (bricks[FIELDHEIGHT - 1][i] != null)
+						if (bricks[FIELDHEIGHT - 1][i].equals(b))
+							return true;
 		}
 		return false;
 	}

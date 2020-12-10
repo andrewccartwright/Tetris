@@ -44,19 +44,19 @@ public class GameDriver {
 				// check if the game has actually been created or ended
 				if (GameOptions.mainGame != null)
 				{
+					if (GameOptions.mainGame.isFull())
+					{
+						gui.end();
+						GameOptions.endGame();
+						break;
+					}
 					if (!GameOptions.mainGame.currentShape.canMove())
 					{
 						GameOptions.mainGame.currentShape.placePiece();
 						GameOptions.mainGame.generateShape(gui);
 					}
 					if (secondCount < 1000)
-					{
 						secondCount += GameOptions.GAMETICKS;
-						for (Brick[] bricks : PlayingField.bricks)
-							for (Brick b : bricks)
-								if (b != null)
-									System.out.println("FOUND THE PROBLEM!+++++++");
-					}
 					else
 					{
 						secondCount = 0;

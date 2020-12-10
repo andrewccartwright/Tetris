@@ -78,8 +78,18 @@ public class GameBoard extends JPanel
 		this.add(GamePanel);
 	}
 	
+	public void deleteBricks()
+	{
+		bricksOnField.forEach((b,n) -> {
+			if(b.getXPos() == -100) 
+				n = null;
+		});
+		repaint();
+	}
+	
 	public void moveBricks()
 	{
 		bricksOnField.forEach((b,n) -> n.setBounds(aX + b.getWidth() * b.getXPos(),475 - (b.getHeight() * b.getYPos()) + aY, b.getWidth(), b.getHeight()));
+		repaint();
 	}
 }

@@ -1,5 +1,5 @@
 //Shape class
-package tetris.shapes;
+// package tetris;
 
 import java.awt.Component;
 import java.awt.Color;
@@ -7,16 +7,11 @@ import java.awt.Graphics;
 import java.lang.Math;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
-
-import tetris.GameBoard;
-import tetris.mechanics.PlayingField;
-
 public class Shape extends Component
 {
     protected Brick[] bricks = new Brick[4];
-    protected ImageIcon[] colors = {GameBoard.CYAN, GameBoard.GREEN, GameBoard.YELLOW, GameBoard.RED, GameBoard.ORANGE, GameBoard.PURPLE, GameBoard.PINK};
-    protected ImageIcon c1;
+    protected Color[] colors = {Color.cyan, Color.green, Color.yellow, Color.red, Color.orange, Color.magenta, Color.pink};
+    protected Color c1;
     protected boolean canMove = true;
 
     //default constructor
@@ -26,23 +21,29 @@ public class Shape extends Component
     }
 
     //setters
-    public void setColor(ImageIcon c1){this.c1 = c1;}
+    public void setColor(Color c1){this.c1 = c1;}
     public void setBricks(Brick[] bricks){this.bricks = bricks;}
 
     //getters
     public Brick[] getBricks(){return bricks;}
-    public ImageIcon[] getColors(){return colors;}
-    public ImageIcon getColor(){return c1;}
+    public Color[] getColors(){return colors;}
+    public Color getColor(){return c1;}
 
-    //tests if the piece can move without hitting another piece or going out of bounds
+    //tests if the piece can move down without hitting another piece or going out of bounds
     public boolean canMove()
     {
         for(int i = 0; i < 4; i++)
         {
+            if(bricks[i].getXPos() < 0 | bricks[i].getXPos() > PlayingField.FIELDWIDTH - 1)
+            {
+                break;
+            }
             if(bricks[i].getYPos()-1 >= 0)
             {
                 if(PlayingField.bricks[bricks[i].getYPos()-1][bricks[i].getXPos()] == null)
+                {
                     canMove = true;
+                }
                 else
                 {
                     canMove = false;
@@ -54,9 +55,9 @@ public class Shape extends Component
                 canMove = false;
                 break;
             }
+
         }
         return canMove;
-
     }
 
     //moves each brick to the left
@@ -65,14 +66,14 @@ public class Shape extends Component
         boolean canMoveLeft = true;
         for(int i = 0; i < 4; i++)
         {
-            if(bricks[i].getXPos()-1 < 0)
+            if(bricks[i].getXPos()-1 >= 0)
             {
-                canMoveLeft = false;
-                break;
+                canMoveLeft = true;
             }
             else
             {
-                canMoveLeft = true;
+                canMoveLeft = false;
+                break;
             }
         }
 
@@ -91,14 +92,14 @@ public class Shape extends Component
         boolean canMoveRight = true;
         for(int i = 0; i < 4; i++)
         {
-            if(bricks[i].getXPos()+1 == PlayingField.FIELDWIDTH)
+            if(bricks[i].getXPos()+1 < PlayingField.FIELDWIDTH-1)
             {
-                canMoveRight = false;
-                break;
+                canMoveRight = true;
             }
             else
             {
-                canMoveRight = true;
+                canMoveRight = false;
+                break;
             }
         }
 
@@ -107,7 +108,6 @@ public class Shape extends Component
             for(Brick b : bricks)
             {
                 b.moveRight();
-                System.out.println(b.getXPos());
             }
         }
     }
@@ -133,15 +133,32 @@ public class Shape extends Component
     {
         for(int i = 0; i < 4; i++)
         {
-            if(!canMove())
-            {
-                PlayingField.bricks[bricks[i].getYPos()][bricks[i].getXPos()] = bricks[i];
-            }
+            PlayingField.bricks[bricks[i].getYPos()][bricks[i].getXPos()] = bricks[i];
         }
+
+        for(int k = PlayingField.FIELDHEIGHT-1; k >= 0; k--)
+        {
+            for(int j = 0; j < PlayingField.FIELDWIDTH; j++)
+            {
+                if(PlayingField.bricks[k][j] == null)
+                {
+                    System.out.print("null" + " ");
+                }
+                else
+                {
+                    System.out.print("aaaa ");
+                }
+            }
+
+            System.out.println();
+        }
+
+        System.out.println();
+
     }
 
     //checks that the piece can rotate without going out of bounds or hitting another piece
-    public boolean testRotation()
+    public boolean testLeftRotation(Brick[] bricks)
     {
         int tempX = 0;
         int tempY = 0;
@@ -157,9 +174,51 @@ public class Shape extends Component
             tempX = -tempY;
             tempY = temp;
 
-            if(PlayingField.bricks[bricks[i].getYPos()-tempY][bricks[i].getXPos() - tempX] == null & bricks[i].getXPos() - tempX < PlayingField.FIELDWIDTH & bricks[i].getYPos()-tempY < PlayingField.FIELDHEIGHT & bricks[i].getXPos() - tempX > 0)
+            if(bricks[i].getXPos() - tempX < PlayingField.FIELDWIDTH & bricks[i].getYPos()+tempY < PlayingField.FIELDHEIGHT & bricks[i].getXPos() - tempX > 0 & bricks[i].getYPos()+tempY > 0)
             {
-                r = true;
+                if(PlayingField.bricks[bricks[i].getYPos()+tempY][bricks[i].getXPos() - tempX] == null)
+                    r = true;
+                else
+                {
+                    r = false;
+                    break;
+                }
+            }
+            else
+            {
+                r = false;
+                break;
+            }
+        }
+
+        return r;
+    }
+
+    public boolean testRightRotation(Brick[] bricks)
+    {
+        int tempX = 0;
+        int tempY = 0;
+        int temp = 0;
+        boolean r = true;
+
+        for(int i = 0; i < 4; i++)
+        {
+            tempX = bricks[i].getXPos() - bricks[0].getXPos();
+            tempY = bricks[i].getYPos() - bricks[0].getYPos();
+
+            temp = tempX;
+            tempX = -tempY;
+            tempY = temp;
+
+            if(bricks[i].getXPos() + tempX < PlayingField.FIELDWIDTH & bricks[i].getYPos()-tempY < PlayingField.FIELDHEIGHT & bricks[i].getXPos() + tempX > 0 & bricks[i].getYPos() - tempY > 0)
+            {
+                if(PlayingField.bricks[bricks[i].getYPos()-tempY][bricks[i].getXPos()+tempX] == null)
+                    r = true;
+                else
+                {
+                    r = false;
+                    break;
+                }
             }
             else
             {
@@ -189,10 +248,10 @@ public class Shape extends Component
             tempY = temp;
 
             //Piece only rotates if testRotation returns true
-            if(testRotation())
+            if(testLeftRotation(bricks))
             {
                 bricks[i].setXPos(bricks[0].getXPos() - tempX);
-                bricks[i].setYPos(bricks[0].getYPos() - tempY);
+                bricks[i].setYPos(bricks[0].getYPos() + tempY);
             }
         }
     }
@@ -216,10 +275,10 @@ public class Shape extends Component
             tempY = temp;
 
             //Piece only rotates if testRotation returns true
-            if(testRotation())
+            if(testRightRotation(bricks))
             {
                 bricks[i].setXPos(bricks[0].getXPos() + tempX);
-                bricks[i].setYPos(bricks[0].getYPos() + tempY);
+                bricks[i].setYPos(bricks[0].getYPos() - tempY);
             }
 
         }
@@ -227,15 +286,15 @@ public class Shape extends Component
 
 
     //draws the shape
-//    public void drawImage(Graphics g)
-//    {
-//        super.paint(g);
-//
-//        g.setColor(c1);
-//
-//        bricks[0].drawImage(g);
-//        bricks[1].drawImage(g);
-//        bricks[2].drawImage(g);
-//        bricks[3].drawImage(g);
-//    }
+    public void drawImage(Graphics g)
+    {
+        super.paint(g);
+
+        g.setColor(c1);
+
+        bricks[0].drawImage(g);
+        bricks[1].drawImage(g);
+        bricks[2].drawImage(g);
+        bricks[3].drawImage(g);
+    }
 }

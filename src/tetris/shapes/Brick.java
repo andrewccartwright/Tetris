@@ -82,7 +82,8 @@ public class Brick extends Component
         
         c1 = color;
         
-        System.out.println(c1.getIconHeight());
+//        System.out.println(this.getYPos() + "===========");
+//        PlayingField.bricks[PlayingField.FIELDHEIGHT - this.getYPos()][this.getXPos()] = this;
     }
 
     public Brick(int xPos, int yPos, int height, int width)
@@ -115,6 +116,8 @@ public class Brick extends Component
     //moves brick down by one gridspace
     public void moveDown()
     {
+//    	PlayingField.bricks[this.getYPos()][this.getXPos()] = null;
+//    	PlayingField.bricks[this.getYPos() - 1][this.getXPos()] = this;
         if(yPos > 0)
             yPos --;
     }
@@ -122,12 +125,16 @@ public class Brick extends Component
     //moves brick one gridspace to the left
     public void moveLeft()
     {
+//    	PlayingField.bricks[this.getYPos()][this.getXPos()] = null;
+//    	PlayingField.bricks[this.getYPos()][this.getXPos() - 1] = this;
         xPos --;
     }
 
     //moves brick one gridspace to the right
     public void moveRight()
     {
+//    	PlayingField.bricks[this.getYPos()][this.getXPos()] = null;
+//    	PlayingField.bricks[this.getYPos()][this.getXPos() + 1] = this;
         xPos ++;
     }
 

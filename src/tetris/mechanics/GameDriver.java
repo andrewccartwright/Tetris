@@ -45,13 +45,17 @@ public class GameDriver {
 				if (GameOptions.mainGame != null)
 				{
 					if (!GameOptions.mainGame.currentShape.canMove())
+					{
+						GameOptions.mainGame.currentShape.placePiece();
 						GameOptions.mainGame.generateShape(gui);
+					}
 					if (secondCount < 1000)
 					{
 						secondCount += GameOptions.GAMETICKS;
-						for (Brick b : PlayingField.bricks[10])
-							if (b != null)
-								System.out.print("(" + b.getXPos() + ", " + b.getYPos() + ")");
+						for (Brick[] bricks : PlayingField.bricks)
+							for (Brick b : bricks)
+								if (b != null)
+									System.out.println("FOUND THE PROBLEM!+++++++");
 					}
 					else
 					{

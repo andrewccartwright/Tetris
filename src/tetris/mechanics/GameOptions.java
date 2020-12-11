@@ -1,8 +1,12 @@
 package tetris.mechanics;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 import javax.swing.JPanel;
 
 import tetris.Test;
+import tetris.shapes.Brick;
 
 public class GameOptions
 {
@@ -13,7 +17,7 @@ public class GameOptions
 	// update 20 times per second
 	public static final int GAMETICKS = 1000 / 50;
 	
-	public void singlePlayer(Test game)
+	public static void singlePlayer(Test game)
 	{
 		mainGame = new PlayingField(game);
 	}
@@ -27,6 +31,7 @@ public class GameOptions
 	public static void endGame()
 	{
 		mainGame = null;
+		PlayingField.bricks = new Brick[PlayingField.FIELDHEIGHT][PlayingField.FIELDWIDTH];
 		displayScore();
 	}
 	

@@ -41,6 +41,7 @@ public class GameDriver {
 			// Check if the game is paused or not
 			if (!options.isPaused)
 			{
+				System.out.println("test");
 				// check if the game has actually been created or ended
 				if (GameOptions.mainGame != null)
 				{
@@ -48,7 +49,7 @@ public class GameDriver {
 					{
 						gui.end();
 						GameOptions.endGame();
-						break;
+						continue;
 					}
 					if (!GameOptions.mainGame.currentShape.canMove())
 					{

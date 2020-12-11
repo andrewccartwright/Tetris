@@ -106,6 +106,8 @@ public class Test extends JFrame
 			repaint();
 			revalidate();
 			gameOn = false;
+			end();
+			GameOptions.endGame();
 		}
 			});
 		
@@ -248,7 +250,7 @@ public class Test extends JFrame
 	
 	public void start()
 	{
-		GameOptions.mainGame = new PlayingField(this);
+		GameOptions.singlePlayer(this);
 	}
 	
 	public void end()

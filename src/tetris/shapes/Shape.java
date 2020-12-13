@@ -119,7 +119,7 @@ public class Shape extends Component
     }
 
     //moves down one gridspace
-    public void moveDown()
+    public void moveDown(GameBoard gameBoard)
     {
         if(canMove())
         {

@@ -30,6 +30,8 @@ public class GameBoard extends JPanel
 	private final int aY = 27 - 25;
 	private final int aX = 28 - 25;
 	private JLabel GamePanel;
+	private int score = 0;
+	private JLabel Score;
 	
 	public GameBoard()
 	{
@@ -37,10 +39,10 @@ public class GameBoard extends JPanel
 		this.setBackground(new Color(27, 23, 61));
 		this.setLayout(null);
 		
-		JLabel Score = new JLabel("12345");
+		Score = new JLabel("Score: " + Integer.toString(score));
 		Score.setForeground(new Color (14, 45, 79));
 		Score.setFont(new Font("Monospaced", Font.BOLD, 30));
-		Score.setBounds(400, 0, 280, 147);
+		Score.setBounds(400 - 75, 0, 280, 147);
 		Score.setVisible(true);
 		this.add(Score);
 		
@@ -90,6 +92,14 @@ public class GameBoard extends JPanel
 	public void moveBricks()
 	{
 		bricksOnField.forEach((b,n) -> n.setBounds(aX + b.getWidth() * b.getXPos(),475 - (b.getHeight() * b.getYPos()) + aY, b.getWidth(), b.getHeight()));
+		repaint();
+	}
+	
+	public void addScore(int newScore)
+	{
+		this.score = this.score + newScore;
+		this.Score.setText("Score: " + Integer.toString(score));
+		System.out.println(score);
 		repaint();
 	}
 }

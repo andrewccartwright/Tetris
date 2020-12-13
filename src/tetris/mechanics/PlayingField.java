@@ -112,6 +112,7 @@ public class PlayingField
 			indexRow++;
 		}
 		gui.getGameBoard().moveBricks();
+		gui.getGameBoard().addScore(100);
 	}
 	
 	// check the bounds of the pieces that are already placed and place the current piece on top of them
@@ -140,6 +141,12 @@ public class PlayingField
 	// the current piece will move down every time the paint method refreshes
 	public void moveDown()
 	{
-		currentShape.moveDown();
+		currentShape.moveDown(gui.getGameBoard());
+	}
+
+	public void moveDown(int i) 
+	{
+		moveDown();
+		gui.getGameBoard().addScore(1);
 	}
 }

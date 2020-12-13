@@ -74,7 +74,7 @@ public class Test extends JFrame
 				if(gameOn)
 				{
 					if (e.getKeyCode() == KeyEvent.VK_S)
-						GameOptions.mainGame.moveDown();
+						GameOptions.mainGame.moveDown(1);
 					if (e.getKeyCode() == KeyEvent.VK_A)
 						GameOptions.mainGame.currentShape.moveLeft();
 					if (e.getKeyCode() == KeyEvent.VK_D)

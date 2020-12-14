@@ -19,6 +19,7 @@ public class Shape extends Component
     protected ImageIcon[] colors = {GameBoard.CYAN, GameBoard.GREEN, GameBoard.YELLOW, GameBoard.RED, GameBoard.ORANGE, GameBoard.PURPLE, GameBoard.PINK};
     protected ImageIcon c1;
     protected boolean canMove = true;
+    private boolean isReversed = false;
 
     //default constructor
     public Shape(int startX, int startY)
@@ -223,22 +224,47 @@ public class Shape extends Component
         int tempY = 0;
         int temp = 0;
 
-        for(int i = 0; i < 4; i++)
+        if (!isReversed)
         {
-
-            tempX = bricks[i].getXPos() - bricks[0].getXPos();
-            tempY = bricks[i].getYPos() - bricks[0].getYPos();
-
-            temp = tempX;
-            tempX = -tempY;
-            tempY = temp;
-
-            //Piece only rotates if testRotation returns true
-            if(testLeftRotation(bricks))
+	        for(int i = 0; i < 4; i++)
+	        {
+	
+	            tempX = bricks[i].getXPos() - bricks[0].getXPos();
+	            tempY = bricks[i].getYPos() - bricks[0].getYPos();
+	
+	            temp = tempX;
+	            tempX = -tempY;
+	            tempY = temp;
+	
+	            //Piece only rotates if testRotation returns true
+	            if(testLeftRotation(bricks))
+	            {
+	                bricks[i].setXPos(bricks[0].getXPos() - tempX);
+	                bricks[i].setYPos(bricks[0].getYPos() + tempY);
+	            }
+	        }
+	        isReversed = !isReversed;
+        }
+        else
+        {
+        	for(int i = 0; i < 4; i++)
             {
-                bricks[i].setXPos(bricks[0].getXPos() - tempX);
-                bricks[i].setYPos(bricks[0].getYPos() + tempY);
+
+                tempX = bricks[i].getXPos() - bricks[0].getXPos();
+                tempY = bricks[i].getYPos() - bricks[0].getYPos();
+
+                temp = tempX;
+                tempX = -tempY;
+                tempY = temp;
+
+                //Piece only rotates if testRotation returns true
+                if(testRightRotation(bricks))
+                {
+                    bricks[i].setXPos(bricks[0].getXPos() + tempX);
+                    bricks[i].setYPos(bricks[0].getYPos() - tempY);
+                }
             }
+        	isReversed = !isReversed;
         }
     }
 
@@ -249,24 +275,48 @@ public class Shape extends Component
         int tempY = 0;
         int temp = 0;
 
-
-        for(int i = 0; i < 4; i++)
+        if (!isReversed)
         {
-
-            tempX = bricks[i].getXPos() - bricks[0].getXPos();
-            tempY = bricks[i].getYPos() - bricks[0].getYPos();
-
-            temp = tempX;
-            tempX = -tempY;
-            tempY = temp;
-
-            //Piece only rotates if testRotation returns true
-            if(testRightRotation(bricks))
-            {
-                bricks[i].setXPos(bricks[0].getXPos() + tempX);
-                bricks[i].setYPos(bricks[0].getYPos() - tempY);
-            }
-
+	        for(int i = 0; i < 4; i++)
+	        {
+	
+	            tempX = bricks[i].getXPos() - bricks[0].getXPos();
+	            tempY = bricks[i].getYPos() - bricks[0].getYPos();
+	
+	            temp = tempX;
+	            tempX = -tempY;
+	            tempY = temp;
+	
+	            //Piece only rotates if testRotation returns true
+	            if(testRightRotation(bricks))
+	            {
+	                bricks[i].setXPos(bricks[0].getXPos() + tempX);
+	                bricks[i].setYPos(bricks[0].getYPos() - tempY);
+	            }
+	            
+	        }
+	        isReversed = !isReversed;
+        }
+        else
+        {
+        	for(int i = 0; i < 4; i++)
+	        {
+	
+	            tempX = bricks[i].getXPos() - bricks[0].getXPos();
+	            tempY = bricks[i].getYPos() - bricks[0].getYPos();
+	
+	            temp = tempX;
+	            tempX = -tempY;
+	            tempY = temp;
+	
+	            //Piece only rotates if testRotation returns true
+	            if(testLeftRotation(bricks))
+	            {
+	                bricks[i].setXPos(bricks[0].getXPos() - tempX);
+	                bricks[i].setYPos(bricks[0].getYPos() + tempY);
+	            }
+	        }
+        	isReversed = !isReversed;
         }
     }
 

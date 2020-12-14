@@ -255,8 +255,8 @@ public class Test extends JFrame
 	
 	public void end()
 	{
-		setContentPane(menu);
-		setSize(465, 420);
+		//setContentPane(menu);
+		//setSize(465, 420);
 		repaint();
 		revalidate();
 		gameOn = false;

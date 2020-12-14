@@ -30,8 +30,10 @@ public class GameBoard extends JPanel
 	private final int aY = 27 - 25;
 	private final int aX = 28 - 25;
 	private JLabel GamePanel;
-	private int score = 0;
+	private static int score = 0;
 	private JLabel Score;
+	private static JLabel splashScreen;
+	private static JLabel finalScore;
 	
 	public GameBoard()
 	{
@@ -39,10 +41,23 @@ public class GameBoard extends JPanel
 		this.setBackground(new Color(27, 23, 61));
 		this.setLayout(null);
 		
-		Score = new JLabel("Score: " + Integer.toString(score));
+		finalScore = new JLabel("00000");
+		finalScore.setForeground(new Color (14, 45, 79));
+		finalScore.setFont(new Font("Monospaced", Font.BOLD, 40));
+		finalScore.setBounds(280, 220, 280, 147);
+		finalScore.setVisible(false);
+		this.add(finalScore);
+		
+		splashScreen = new JLabel();
+		splashScreen.setBounds(30, 100, 451, 301);
+		splashScreen.setIcon(new ImageIcon("Images\\YouWin.png"));
+		splashScreen.setVisible(false);
+		this.add(splashScreen);
+		
+		Score = new JLabel(Integer.toString(score));
 		Score.setForeground(new Color (14, 45, 79));
 		Score.setFont(new Font("Monospaced", Font.BOLD, 30));
-		Score.setBounds(400 - 75, 0, 280, 147);
+		Score.setBounds(400, 0, 280, 147);
 		Score.setVisible(true);
 		this.add(Score);
 		
@@ -65,6 +80,14 @@ public class GameBoard extends JPanel
 //	{
 //		g.drawRect(10, 10, 100, 100);
 //	}
+	
+	public static void displayScore()
+	{
+		finalScore.setText(Integer.toString(score));
+		score = 0;
+		finalScore.setVisible(true);
+		splashScreen.setVisible(true);
+	}
 	
 	public void addBricks(Brick[] newBricks)
 	{
@@ -98,8 +121,8 @@ public class GameBoard extends JPanel
 	public void addScore(int newScore)
 	{
 		this.score = this.score + newScore;
-		this.Score.setText("Score: " + Integer.toString(score));
-		System.out.println(score);
+		this.Score.setText(Integer.toString(score));
+		//System.out.println(score);
 		repaint();
 	}
 }

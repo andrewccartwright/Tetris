@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import javax.swing.JPanel;
 
+import tetris.GameBoard;
 import tetris.Test;
 import tetris.shapes.Brick;
 
@@ -32,12 +33,7 @@ public class GameOptions
 	{
 		mainGame = null;
 		PlayingField.bricks = new Brick[PlayingField.FIELDHEIGHT][PlayingField.FIELDWIDTH];
-		displayScore();
-	}
-	
-	public static void displayScore()
-	{
-		// display score window
+		GameBoard.displayScore();
 	}
 	
 	public void pauseAndUnpauseGame()

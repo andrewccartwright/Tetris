@@ -122,8 +122,7 @@ public class PlayingField
 	}
 	
 	/* check if the tetrominoes have reached the top of the playing field every time a piece is placed. 
-	 * If this method returns true, the endGame() method will be called, the user’s final score will be displayed, 
-	 * and the user will be asked if they would like to play again.
+	 * If this method returns true, the endGame() method will be called and the user’s final score will be displayed.
 	 */
 	public boolean isFull()
 	{

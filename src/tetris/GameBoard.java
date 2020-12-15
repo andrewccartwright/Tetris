@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -16,15 +17,73 @@ import tetris.shapes.Brick;
 
 public class GameBoard extends JPanel
 {
-	public static ImageIcon CYAN = new ImageIcon("Images\\CyanBlock.png");
-	public static ImageIcon YELLOW = new ImageIcon("Images\\YellowBlock.png");
-	public static ImageIcon ORANGE = new ImageIcon("Images\\OrangeBlock.png");
-	public static ImageIcon PINK = new ImageIcon("Images\\PinkBlock.png");
-	public static ImageIcon PURPLE = new ImageIcon("Images\\PurpleBlock.png");
-	public static ImageIcon RED = new ImageIcon("Images\\RedBlock.png");
-	public static ImageIcon GREEN = new ImageIcon("Images\\GreenBlock.png");
+	//classic
+	public static ImageIcon CYAN = new ImageIcon("Images" + File.separator + "Classic" + File.separator + "CyanBlock.png");
+	public static ImageIcon YELLOW = new ImageIcon("Images" + File.separator + "Classic" + File.separator + "YellowBlock.png");
+	public static ImageIcon ORANGE = new ImageIcon("Images" + File.separator + "Classic" + File.separator + "OrangeBlock.png");
+	public static ImageIcon PINK = new ImageIcon("Images" + File.separator + "Classic" + File.separator + "PinkBlock.png");
+	public static ImageIcon PURPLE = new ImageIcon("Images" + File.separator + "Classic" + File.separator + "PurpleBlock.png");
+	public static ImageIcon RED = new ImageIcon("Images" + File.separator + "Classic" + File.separator + "RedBlock.png");
+	public static ImageIcon GREEN = new ImageIcon("Images" + File.separator + "Classic" + File.separator + "GreenBlock.png");
 	
-	private ImageIcon GamePanelBackground = new ImageIcon("Images\\GameBackground.png");
+	public static ImageIcon[] classic = {CYAN, YELLOW, ORANGE, PINK, PURPLE, RED, GREEN};
+	
+	//BerryBlast
+	public static ImageIcon BLACKBERRY = new ImageIcon("Images" + File.separator + "BerryBlast" + File.separator + "BlackBerry.png");
+	public static ImageIcon BLUEBERRY = new ImageIcon("Images" + File.separator + "BerryBlast" + File.separator + "Blueberry.png");
+	public static ImageIcon BOISONBERRY = new ImageIcon("Images" + File.separator + "BerryBlast" + File.separator + "Boisonberry.png");
+	public static ImageIcon PEACHBERRY = new ImageIcon("Images" + File.separator + "BerryBlast" + File.separator + "Peachberry.png");
+	public static ImageIcon RASPBERRY = new ImageIcon("Images" + File.separator + "BerryBlast" + File.separator + "Raspberry.png");
+	public static ImageIcon STARBERRY = new ImageIcon("Images" + File.separator + "BerryBlast" + File.separator + "Starberry.png");
+	public static ImageIcon STRAWBERRY = new ImageIcon("Images" + File.separator + "BerryBlast" + File.separator + "Strawberry.png");
+	
+	public static ImageIcon[] berryBlast = {BLACKBERRY, BLUEBERRY, BOISONBERRY, PEACHBERRY, RASPBERRY, STARBERRY, STRAWBERRY};
+	
+	//ColorShift
+	public static ImageIcon BLACKSHIFT = new ImageIcon("Images" + File.separator + "ColorShift" + File.separator + "Black.png");
+	public static ImageIcon BLUESHIFT = new ImageIcon("Images" + File.separator + "ColorShift" + File.separator + "Blue.png");
+	public static ImageIcon GRAYSHIFT = new ImageIcon("Images" + File.separator + "ColorShift" + File.separator + "Gray.png");
+	public static ImageIcon GREENSHIFT = new ImageIcon("Images" + File.separator + "ColorShift" + File.separator + "Green.png");
+	public static ImageIcon ORANGESHIFT = new ImageIcon("Images" + File.separator + "ColorShift" + File.separator + "Orange.png");
+	public static ImageIcon PINKSHIFT = new ImageIcon("Images" + File.separator + "ColorShift" + File.separator + "Pink.png");
+	public static ImageIcon PURPLESHIFT = new ImageIcon("Images" + File.separator + "ColorShift" + File.separator + "Purple.png");
+	public static ImageIcon YELLOWSHIFT = new ImageIcon("Images" + File.separator + "ColorShift" + File.separator + "Yellow.png");
+	
+	public static ImageIcon[] colorShift = {BLACKSHIFT, BLUESHIFT, GRAYSHIFT, GREENSHIFT, ORANGESHIFT, PINKSHIFT, PURPLESHIFT, YELLOWSHIFT};
+	
+	//Cuppacino
+	public static ImageIcon CREME = new ImageIcon("Images" + File.separator + "Cuppacino" + File.separator + "Creme.png");
+	public static ImageIcon DARK = new ImageIcon("Images" + File.separator + "Cuppacino" + File.separator + "Dark.png");
+	public static ImageIcon FRAPPE = new ImageIcon("Images" + File.separator + "Cuppacino" + File.separator + "Frappe.png");
+	public static ImageIcon FRENCH = new ImageIcon("Images" + File.separator + "Cuppacino" + File.separator + "French.png");
+	public static ImageIcon FROTH = new ImageIcon("Images" + File.separator + "Cuppacino" + File.separator + "Froth.png");
+	public static ImageIcon MILK = new ImageIcon("Images" + File.separator + "Cuppacino" + File.separator + "Milk.png");
+	public static ImageIcon MOCHA = new ImageIcon("Images" + File.separator + "Cuppacino" + File.separator + "Mocha.png");
+	public static ImageIcon SUGAR = new ImageIcon("Images" + File.separator + "Cuppacino" + File.separator + "Sugar.png");
+
+	public static ImageIcon[] cuppacino = {CREME, DARK, FRAPPE, FRENCH, FROTH, MILK, MOCHA, SUGAR};
+	
+	//Pastel
+	public static ImageIcon BLUEPASTEL = new ImageIcon("Images" + File.separator + "Pastel" + File.separator + "BluePastel.png");
+	public static ImageIcon CYANPASTEL = new ImageIcon("Images" + File.separator + "Pastel" + File.separator + "CyanPastel.png");
+	public static ImageIcon GREENPASTEL = new ImageIcon("Images" + File.separator + "Pastel" + File.separator + "GreenPastel.png");
+	public static ImageIcon PINKPASTEL = new ImageIcon("Images" + File.separator + "Pastel" + File.separator + "PinkPastel.png");
+	public static ImageIcon ORANGEPASTEL = new ImageIcon("Images" + File.separator + "Pastel" + File.separator + "OrangePastel.png");
+	public static ImageIcon PURPLEPASTEL = new ImageIcon("Images" + File.separator + "Pastel" + File.separator + "PurplePastel.png");
+	public static ImageIcon REDPASTEL = new ImageIcon("Images" + File.separator + "Pastel" + File.separator + "RedPastel.png");
+	public static ImageIcon YELLOWPASTEL = new ImageIcon("Images" + File.separator + "Pastel" + File.separator + "YellowPastel.png");
+
+	public static ImageIcon[] pastel = {BLUEPASTEL, CYANPASTEL, GREENPASTEL, PINKPASTEL, ORANGEPASTEL, PURPLEPASTEL, REDPASTEL, YELLOWPASTEL};
+	
+	//Winter
+	public static ImageIcon CHOCOLATE = new ImageIcon("Images" + File.separator + "Winter" + File.separator + "Choclate.png");
+	public static ImageIcon GRAPE = new ImageIcon("Images" + File.separator + "Winter" + File.separator + "Grape.png");
+	public static ImageIcon ICE = new ImageIcon("Images" + File.separator + "Winter" + File.separator + "Ice.png");
+	public static ImageIcon MIDNIGHT = new ImageIcon("Images" + File.separator + "Winter" + File.separator + "Midnight.png");
+
+	public static ImageIcon[] winter = {CHOCOLATE, GRAPE, ICE, MIDNIGHT, CHOCOLATE, GRAPE, ICE};
+	
+	private ImageIcon GamePanelBackground = new ImageIcon("Images" + File.separator + "GameBackground.png");
 	
 	private HashMap<Brick, JLabel> bricksOnField = new HashMap<Brick, JLabel>();
 	private final int aY = 27 - 25;
@@ -50,11 +109,11 @@ public class GameBoard extends JPanel
 		
 		splashScreen = new JLabel();
 		splashScreen.setBounds(30, 100, 451, 301);
-		splashScreen.setIcon(new ImageIcon("Images\\YouWin.png"));
+		splashScreen.setIcon(new ImageIcon("Images" + File.separator + "YouWin.png"));
 		splashScreen.setVisible(false);
 		this.add(splashScreen);
 		
-		Score = new JLabel(Integer.toString(score));
+		Score = new JLabel(Integer.toString(score));		
 		Score.setForeground(new Color (14, 45, 79));
 		Score.setFont(new Font("Monospaced", Font.BOLD, 30));
 		Score.setBounds(400, 0, 280, 147);
@@ -63,11 +122,11 @@ public class GameBoard extends JPanel
 		
 		GamePanel = new JLabel();
 		GamePanel.setBounds(0,0, 255, 505);
-		GamePanel.setIcon(new ImageIcon("Images\\GameBackground.png"));
+		GamePanel.setIcon(new ImageIcon("Images" + File.separator + "GameBackground.png"));
 		
 		JLabel ScorePanel = new JLabel("");
 		ScorePanel.setForeground(Color.WHITE);
-		ScorePanel.setIcon(new ImageIcon("Images\\ScoreBackground.png"));
+		ScorePanel.setIcon(new ImageIcon("Images" + File.separator + "ScoreBackground.png"));
 		ScorePanel.setBounds(new Rectangle(263, 0, 280, 147));
 		this.add(ScorePanel);
 		

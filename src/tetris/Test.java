@@ -18,6 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.border.LineBorder;
 
 import tetris.mechanics.GameOptions;
 import tetris.mechanics.PlayingField;
@@ -32,6 +33,7 @@ public class Test extends JFrame
 	public ImageIcon mainmenu;
 	boolean gameOn = false;
 	public Clip clip;
+	public static String colorChoice;
 
 	public static void main(String[] args) 
 	{
@@ -50,7 +52,7 @@ public class Test extends JFrame
 
 	public Test() throws UnsupportedAudioFileException, IOException, LineUnavailableException
 	{
-		AudioInputStream audio = AudioSystem.getAudioInputStream(new File("Music\\song.wav"));
+		AudioInputStream audio = AudioSystem.getAudioInputStream(new File("Music" + File.separator + "song.wav"));
 		clip = AudioSystem.getClip();
 		clip.open(audio);
 		clip.loop(Clip.LOOP_CONTINUOUSLY);
@@ -92,7 +94,7 @@ public class Test extends JFrame
 		GBack = new JButton("");
 		GBack.setBorder(null);
 		GBack.setBounds(290, 400, 206, 76);
-		GBack.setIcon(new ImageIcon("Images\\BackButton.png"));
+		GBack.setIcon(new ImageIcon("Images" + File.separator + "BackButton.png"));
 		GBack.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		GBack.setFocusPainted(false);
 		GBack.setContentAreaFilled(false);
@@ -114,16 +116,16 @@ public class Test extends JFrame
 		game = new GameBoard();
 		
 		menu = new JLabel("");
-		menu.setIcon(new ImageIcon("Images\\MainMenu-01.png"));
+		menu.setIcon(new ImageIcon("Images" + File.separator + "MainMenu-01.png"));
 		menu.setLayout(null);
 		menu.setFocusable(false);
 		
 		options = new JLabel("");
-		options.setIcon(new ImageIcon("Images\\OptionsMenu.png"));
+		options.setIcon(new ImageIcon("Images" + File.separator + "OptionsMenu.png"));
 		options.setLayout(null);
 		
 		credits = new JLabel("");
-		credits.setIcon(new ImageIcon("Images\\CreditsMenu.png"));
+		credits.setIcon(new ImageIcon("Images" + File.separator + "CreditsMenu.png"));
 		credits.setLayout(null);
 		
 		setContentPane(menu);
@@ -131,7 +133,7 @@ public class Test extends JFrame
 		JButton StartButton = new JButton("");
 		StartButton.setBorder(null);
 		StartButton.setBounds(10, 204, 206, 76);
-		StartButton.setIcon(new ImageIcon ("Images\\StartButton.png"));
+		StartButton.setIcon(new ImageIcon ("Images" + File.separator + "StartButton.png"));
 		StartButton.setFocusPainted(false);
 		StartButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		StartButton.setContentAreaFilled(false);
@@ -155,7 +157,7 @@ public class Test extends JFrame
 		JButton OptionsButton = new JButton("");
 		OptionsButton.setBorder(null);
 		OptionsButton.setBounds(10, 300, 206, 76);
-		OptionsButton.setIcon(new ImageIcon ("Images\\OptButton.png"));
+		OptionsButton.setIcon(new ImageIcon ("Images" + File.separator + "OptButton.png"));
 		OptionsButton.setFocusPainted(false);
 		OptionsButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		OptionsButton.setContentAreaFilled(false);
@@ -174,7 +176,7 @@ public class Test extends JFrame
 		JButton CreditsButton = new JButton("");
 		CreditsButton.setBorder(null);
 		CreditsButton.setBounds(229, 204, 206, 76);
-		CreditsButton.setIcon(new ImageIcon ("Images\\CredButton.png"));
+		CreditsButton.setIcon(new ImageIcon ("Images" + File.separator + "CredButton.png"));
 		CreditsButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		CreditsButton.setFocusPainted(false);
 		CreditsButton.setContentAreaFilled(false);
@@ -193,7 +195,7 @@ public class Test extends JFrame
 		JButton Quit = new JButton("");
 		Quit.setBorder(null);
 		Quit.setBounds(229, 300, 206, 76);
-		Quit.setIcon(new ImageIcon("Images\\QuitButton.png"));
+		Quit.setIcon(new ImageIcon("Images" + File.separator + "QuitButton.png"));
 		Quit.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		Quit.setFocusPainted(false);
 		Quit.setContentAreaFilled(false);
@@ -210,7 +212,7 @@ public class Test extends JFrame
 		JButton OBack = new JButton("");
 		OBack.setBorder(null);
 		OBack.setBounds(229, 300, 206, 76);
-		OBack.setIcon(new ImageIcon("Images\\BackButton.png"));
+		OBack.setIcon(new ImageIcon("Images" + File.separator + "BackButton.png"));
 		OBack.setContentAreaFilled(false);
 		OBack.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		OBack.setFocusPainted(false);
@@ -227,10 +229,120 @@ public class Test extends JFrame
 			});
 		options.add(OBack);
 		
+		JButton Classic = new JButton("Classic");
+		Classic.setBorder(new LineBorder(Color.WHITE));
+		Classic.setForeground(Color.WHITE);
+		Classic.setBounds(175,130,100,20);
+		Classic.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		Classic.setFocusPainted(false);
+		Classic.setContentAreaFilled(false);
+		Classic.addActionListener(new ActionListener()
+				{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				colorChoice = "Classic";
+			}
+					
+				});
+		options.add(Classic);
+		
+		JButton BerryBlast = new JButton("BerryBlast");
+		BerryBlast.setBorder(new LineBorder(Color.WHITE));
+		BerryBlast.setForeground(Color.WHITE);
+		BerryBlast.setBounds(175,155,100,20);
+		BerryBlast.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		BerryBlast.setFocusPainted(false);
+		BerryBlast.setContentAreaFilled(false);
+		BerryBlast.addActionListener(new ActionListener()
+				{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				colorChoice = "BerryBlast";
+			}
+					
+				});
+		options.add(BerryBlast);
+		
+		
+		
+		JButton ColorShift = new JButton("ColorShift");
+		ColorShift.setBorder(new LineBorder(Color.WHITE));
+		ColorShift.setForeground(Color.WHITE);
+		ColorShift.setBounds(175,180,100,20);
+		ColorShift.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		ColorShift.setFocusPainted(false);
+		ColorShift.setContentAreaFilled(false);
+		ColorShift.addActionListener(new ActionListener()
+				{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				colorChoice = "ColorShift";
+			}
+					
+				});
+		options.add(ColorShift);
+		
+		JButton Cuppacino = new JButton("Cuppacino");
+		Cuppacino.setBorder(new LineBorder(Color.WHITE));
+		Cuppacino.setForeground(Color.WHITE);
+		Cuppacino.setBounds(175,205,100,20);
+		Cuppacino.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		Cuppacino.setFocusPainted(false);
+		Cuppacino.setContentAreaFilled(false);
+		Cuppacino.addActionListener(new ActionListener()
+				{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				colorChoice = "Cuppacino";
+			}
+					
+				});
+		options.add(Cuppacino);
+		
+		JButton Pastel = new JButton("Pastel");
+		Pastel.setBorder(new LineBorder(Color.WHITE));
+		Pastel.setForeground(Color.WHITE);
+		Pastel.setBounds(175,230,100,20);
+		Pastel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		Pastel.setFocusPainted(false);
+		Pastel.setContentAreaFilled(false);
+		Pastel.addActionListener(new ActionListener()
+				{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				colorChoice = "Pastel";
+			}
+					
+				});
+		options.add(Pastel);
+		
+		JButton Winter = new JButton("Winter");
+		Winter.setBorder(new LineBorder(Color.WHITE));
+		Winter.setForeground(Color.WHITE);
+		Winter.setBounds(175,255,100,20);
+		Winter.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		Winter.setFocusPainted(false);
+		Winter.setContentAreaFilled(false);
+		Winter.addActionListener(new ActionListener()
+				{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				colorChoice = "Winter";
+			}
+					
+				});
+		options.add(Winter);
+		
 		JButton CBack = new JButton("");
 		CBack.setBorder(null);
 		CBack.setBounds(229, 300, 206, 76);
-		CBack.setIcon(new ImageIcon("Images\\BackButton.png"));
+		CBack.setIcon(new ImageIcon("Images" + File.separator + "BackButton.png"));
 		CBack.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		CBack.setFocusPainted(false);
 		CBack.setContentAreaFilled(false);

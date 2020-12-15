@@ -33,6 +33,7 @@ public class PlayingField
 	// create a shape of a random type and set it to be the current shape
 	public void generateShape(Test gui)
 	{
+		boolean empty = true;
 		int startX = FIELDWIDTH / 2;
 		int startY = FIELDHEIGHT - 1;
 		switch ((int)(Math.random() * uniqueShapeCount)) {
@@ -48,7 +49,20 @@ public class PlayingField
 		break;
 		}
 		
-		gui.getGameBoard().addBricks(currentShape.getBricks());
+		for(int i = 0; i < 4; i++)
+		{
+			if(PlayingField.bricks[currentShape.getBricks()[i].getYPos()][currentShape.getBricks()[i].getXPos()] == null)
+			{
+				empty = true;
+			}
+			else
+			{
+				empty = false;
+				break;
+			}
+		}
+		if(empty)
+			gui.getGameBoard().addBricks(currentShape.getBricks());
 	}
 	
 	private int checkForFullRows()
@@ -122,7 +136,8 @@ public class PlayingField
 	}
 	
 	/* check if the tetrominoes have reached the top of the playing field every time a piece is placed. 
-	 * If this method returns true, the endGame() method will be called and the user’s final score will be displayed.
+	 * If this method returns true, the endGame() method will be called, the userï¿½s final score will be displayed, 
+	 * and the user will be asked if they would like to play again.
 	 */
 	public boolean isFull()
 	{

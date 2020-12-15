@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 import tetris.GameBoard;
+import tetris.Test;
 import tetris.mechanics.PlayingField;
 
 public class Shape extends Component
@@ -20,16 +21,49 @@ public class Shape extends Component
     protected ImageIcon c1;
     protected boolean canMove = true;
     private boolean isReversed = false;
+    protected int currentRotation = 0;
 
     //default constructor
     public Shape(int startX, int startY)
     {
         bricks[0] = new Brick(startX,startY);
+        
+        
+        if(Test.colorChoice != null)
+        {
+        	switch(Test.colorChoice)
+            {
+            	case "Classic":
+            		colors = GameBoard.classic;
+            		break;
+            	case "BerryBlast":
+            		colors = GameBoard.berryBlast;
+            		break;
+            	case "ColorShift":
+            		colors = GameBoard.colorShift;
+            		break;
+            	case "Cuppacino":
+            		colors = GameBoard.cuppacino;
+            		break;
+            	case "Pastel":
+            		colors = GameBoard.pastel;
+            		break;
+            	case "Winter":
+            		colors = GameBoard.winter;
+            		break;
+            	default:
+            		colors = GameBoard.classic;
+            }
+        }
+        
+        	
     }
 
     //setters
     public void setColor(ImageIcon c1){this.c1 = c1;}
+    public void setColors(ImageIcon[] colors) {this.colors = colors;}
     public void setBricks(Brick[] bricks){this.bricks = bricks;}
+    
 
     //getters
     public Brick[] getBricks(){return bricks;}
@@ -73,9 +107,15 @@ public class Shape extends Component
         boolean canMoveLeft = true;
         for(int i = 0; i < 4; i++)
         {
-            if(bricks[i].getXPos()-1 >= 0)
+            if(bricks[i].getXPos() > 0)
             {
-                canMoveLeft = true;
+            	if(PlayingField.bricks[bricks[i].getYPos()][bricks[i].getXPos()-1] == null)
+            		canMoveLeft = true;
+            	else
+            	{
+            		canMoveLeft = false;
+            		break;
+            	}
             }
             else
             {
@@ -99,9 +139,15 @@ public class Shape extends Component
         boolean canMoveRight = true;
         for(int i = 0; i < 4; i++)
         {
-            if(bricks[i].getXPos()+1 < PlayingField.FIELDWIDTH)
+            if(bricks[i].getXPos() < PlayingField.FIELDWIDTH -1)
             {
-                canMoveRight = true;
+            	if(PlayingField.bricks[bricks[i].getYPos()][bricks[i].getXPos()+1] == null)
+            		canMoveRight = true;
+            	else
+            	{
+            		canMoveRight = false;
+            		break;
+            	}
             }
             else
             {
@@ -144,7 +190,7 @@ public class Shape extends Component
         }
     }
 
-    //checks that the piece can rotate without going out of bounds or hitting another piece
+  //checks that the piece can rotate without going out of bounds or hitting another piece
     public boolean testLeftRotation(Brick[] bricks)
     {
         int tempX = 0;
@@ -319,18 +365,4 @@ public class Shape extends Component
         	isReversed = !isReversed;
         }
     }
-
-
-//    //draws the shape
-//    public void drawImage(Graphics g)
-//    {
-//        super.paint(g);
-//
-//        g.setColor(c1);
-//
-//        bricks[0].drawImage(g);
-//        bricks[1].drawImage(g);
-//        bricks[2].drawImage(g);
-//        bricks[3].drawImage(g);
-//    }
 }

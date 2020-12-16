@@ -37,7 +37,7 @@ public class GameBoard extends JPanel
 	public static ImageIcon STARBERRY = new ImageIcon("Images" + File.separator + "BerryBlast" + File.separator + "Starberry.png");
 	public static ImageIcon STRAWBERRY = new ImageIcon("Images" + File.separator + "BerryBlast" + File.separator + "Strawberry.png");
 
-	public static ImageIcon[] berryBlast = {BLACKBERRY, BLUEBERRY, BOISONBERRY, PEACHBERRY, RASPBERRY, STARBERRY, STRAWBERRY};
+	public static ImageIcon[] berryBlast = {BLACKBERRY, BLUEBERRY, BOISONBERRY, PEACHBERRY, RASBERRY, STARBERRY, STRAWBERRY};
 
 	//ColorShift
 	public static ImageIcon BLACKSHIFT = new ImageIcon("Images" + File.separator + "ColorShift" + File.separator + "Black.png");
